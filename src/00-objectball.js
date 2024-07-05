@@ -123,7 +123,7 @@ console.log(gameObject(), "\n\n");
 
 // function RETURNS the name of the home team
 function homeTeam() {
-    return gameObject()["home"]["teamName"];; //calling of function that contains the object we want to access
+    return gameObject()["home"]["teamName"]; //calling of function that contains the object we want to access
 }
 
 // outputs return value of function homeTeam()
@@ -171,3 +171,13 @@ function teamColors(teamName) {
 
 // outputs colour of mentioned team
 console.log(teamColors("Charlotte Hornets"));
+
+// a function that returns an array of the team names
+function teamNames() {
+    const game = gameObject(); // calls object function for access
+    let arr = []; //declare variable to carry array
+
+    return arr = `[${game.home.teamName},  ${game.away.teamName}]`; // returns array
+}
+
+console.log(teamNames()); // outputs team names
