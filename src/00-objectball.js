@@ -134,10 +134,10 @@ function numPointsScored(playerName) {
     game = gameObject(); //call function containing object to allow access
 
     //checks if the name passed as argument exists in the object
-    if (playerName in game.home.players) 
+    if (playerName in game.home.players)
         return `${playerName}'s Points is: ${game.home.players[playerName].points}`;
     else if (playerName in game.away.players)
-        return `${playerName}'s Points is: ${game.away.players[playerName].points}`;    
+        return `${playerName}'s Points is: ${game.away.players[playerName].points}`;
 }
 
 // outputs points scored by the specific player named
@@ -148,11 +148,26 @@ function shoeSize(playerName) {
     game = gameObject(); //call function containing object to allow access
 
     //checks if the name passed as argument exists in the object
-    if (playerName in game.home.players) 
+    if (playerName in game.home.players)
         return `${playerName}'s Shoe Size is: ${game.home.players[playerName].shoe}`;
     else if (playerName in game.away.players)
-        return `${playerName}'s Shoe Size is: ${game.away.players[playerName].shoe}`;    
+        return `${playerName}'s Shoe Size is: ${game.away.players[playerName].shoe}`;
 }
 
 // outputs shoe size of mentioned player
 console.log(shoeSize("Jeff Adrien"));
+
+// a function that takes in an argument of a team's name and returns the team's colours
+function teamColors(teamName) {
+    const game = gameObject(); //call function containing object to allow access
+
+    for (let teamSide of ["home", "away"]) { //for...of to iterate through the different team sides
+        if (game[teamSide].teamName === teamName) //checks if argument exists in the object. if it exists it returns the colours
+            return `${teamName}'s colours are: ${game[teamSide].colors}`;
+    }
+
+    return `${teamName}'s not playing today!`; //returns if argument is non-existent in the object
+}
+
+// outputs colour of mentioned team
+console.log(teamColors("Charlotte Hornets"));
