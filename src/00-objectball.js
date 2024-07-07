@@ -1,4 +1,5 @@
-// a function that contains and RETURNS an object 
+// a function that contains and RETURNS an object
+console.log("DISPLAY OF OBJECT"); 
 function gameObject() {
     const obj = {
         home: { // home team object
@@ -122,6 +123,7 @@ function gameObject() {
 console.log(gameObject(), "\n\n");
 
 // function RETURNS the name of the home team
+console.log("NAME OF HOME TEAM")
 function homeTeam() {
     return gameObject()["home"]["teamName"]; //calling of function that contains the object we want to access
 }
@@ -183,14 +185,15 @@ function teamNames() {
 
 }
 
-console.log(teamNames()); // outputs team names
+console.log(teamNames(), "\n"); // outputs team names
 
-// // a function that takes in the team's name as an argument and RETURNS the team's jersey numbers
+// a function that takes in the team's name as an argument and RETURNS the team's jersey numbers
+console.log("JERSEY NUMBERS");
 function playerNumbers(teamName) {
     const game = gameObject(); // Call function to get game data
     let team; // variable to store the team sides i.e home or away
     const jerseys = []; // array to store jersey numbers
-    
+
     // checks whether argument passed is among the teams playing
     if (teamName === game.home.teamName)
         team = game.home;
@@ -206,4 +209,26 @@ function playerNumbers(teamName) {
 }
 
 //outputs the array of jersey numbers
-console.log(playerNumbers("Brooklyn Nets"));
+console.log(playerNumbers("Brooklyn Nets"), "\n");
+
+// a function that takes in player's name as argument and RETURNS players stats as an object
+console.log("PLAYER STATS")
+function playerStats(playerName) {
+    const game = gameObject(); // call function to get game data
+  
+    for (const team in game) { // loop that iterates through the game object
+      for (const playerNameSpec in game[team].players) {
+        if (playerNameSpec === playerName) { // checks whether player passed as argument exists in the object
+          const player = game[team].players[playerNameSpec];
+          console.log(playerName,":", player);
+          return;
+        }
+        debugger;
+      }
+    }
+  
+    console.log("Player", playerName, "not found."); // outputs if player not found
+  }  
+
+playerStats("Jeff Adrien"); // calls function that outputs the stats of the specific player
+
