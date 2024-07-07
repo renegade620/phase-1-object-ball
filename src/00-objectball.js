@@ -138,6 +138,7 @@ function numPointsScored(playerName) {
         return `${playerName}'s Points is: ${game.home.players[playerName].points}`;
     else if (playerName in game.away.players)
         return `${playerName}'s Points is: ${game.away.players[playerName].points}`;
+    debugger;
 }
 
 // outputs points scored by the specific player named
@@ -152,6 +153,7 @@ function shoeSize(playerName) {
         return `${playerName}'s Shoe Size is: ${game.home.players[playerName].shoe}`;
     else if (playerName in game.away.players)
         return `${playerName}'s Shoe Size is: ${game.away.players[playerName].shoe}`;
+    debugger;
 }
 
 // outputs shoe size of mentioned player
@@ -165,7 +167,7 @@ function teamColors(teamName) {
         if (game[teamSide].teamName === teamName) //checks if argument exists in the object. if it exists it returns the colours
             return `${teamName}'s colours are: ${game[teamSide].colors}`;
     }
-
+    debugger;
     return `${teamName}'s not playing today!`; //returns if argument is non-existent in the object
 }
 
@@ -175,9 +177,55 @@ console.log(teamColors("Charlotte Hornets"));
 // a function that returns an array of the team names
 function teamNames() {
     const game = gameObject(); // calls object function for access
-    let arr = []; //declare variable to carry array
+    let arr = [game.home.teamName, game.away.teamName]; //array that holds the team names
+    debugger;
+    return arr;
 
-    return arr = `[${game.home.teamName},  ${game.away.teamName}]`; // returns array
 }
 
 console.log(teamNames()); // outputs team names
+
+// // a function that takes in the team's name as an argument and RETURNS the team's jersey numbers
+// function playerNumbers(teamName) {
+//     const game = gameObject();
+
+//     if (teamName === game.home.teamName) {
+//         return game.home.players.number;
+//     } else if (teamName === game.away.teamName) {
+//         return game.away.players.number;
+//     }
+//     debugger;
+//     return 0;
+// }
+
+// function playerNumbers(teamName) {
+//     const game = gameObject();
+//     if (teamName === game.home.teamName) {
+//       return Object.values(game.home.players).map(player => player.number);
+//     } else if (teamName === game.away.teamName) {
+//       return Object.values(game.away.players).map(player => player.number);
+//     } else {
+//       return `${teamName} not found in game data`; // Error handling
+//     }
+//   }
+function playerNumbers(teamName) {
+    const game = gameObject(); // Call function to get game data
+    let team; // variable to store the team sides i.e home or away
+    const jerseys = []; // array to store jersey numbers
+    
+    // checks whether argument passed is among the teams playing
+    if (teamName === game.home.teamName)
+        team = game.home;
+    else if (teamName === game.away.teamName)
+        team = game.away;
+
+    // loop to iterate through the jersey numbers
+    for (playerName in team.players) {
+        jerseys.push(team.players[playerName].number); //appends the jersey numbers into the array
+    }
+
+    return jerseys; // Return the array of jersey numbers
+}
+
+//outputs the array of jersey numbers
+console.log(playerNumbers("Brooklyn Nets"));
