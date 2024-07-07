@@ -186,28 +186,6 @@ function teamNames() {
 console.log(teamNames()); // outputs team names
 
 // // a function that takes in the team's name as an argument and RETURNS the team's jersey numbers
-// function playerNumbers(teamName) {
-//     const game = gameObject();
-
-//     if (teamName === game.home.teamName) {
-//         return game.home.players.number;
-//     } else if (teamName === game.away.teamName) {
-//         return game.away.players.number;
-//     }
-//     debugger;
-//     return 0;
-// }
-
-// function playerNumbers(teamName) {
-//     const game = gameObject();
-//     if (teamName === game.home.teamName) {
-//       return Object.values(game.home.players).map(player => player.number);
-//     } else if (teamName === game.away.teamName) {
-//       return Object.values(game.away.players).map(player => player.number);
-//     } else {
-//       return `${teamName} not found in game data`; // Error handling
-//     }
-//   }
 function playerNumbers(teamName) {
     const game = gameObject(); // Call function to get game data
     let team; // variable to store the team sides i.e home or away
