@@ -217,18 +217,65 @@ function playerStats(playerName) {
     const game = gameObject(); // call function to get game data
   
     for (const team in game) { // loop that iterates through the game object
-      for (const playerNameSpec in game[team].players) {
+      for (const playerNameSpec in game[team].players) { // loop that iterates through the team players
         if (playerNameSpec === playerName) { // checks whether player passed as argument exists in the object
           const player = game[team].players[playerNameSpec];
-          console.log(playerName,":", player);
+          console.log(playerName,":", player, "\n");
           return;
         }
         debugger;
       }
     }
   
-    console.log("Player", playerName, "not found."); // outputs if player not found
+    console.log("Player", playerName, "not found.\n"); // outputs if player not found
   }  
 
 playerStats("Jeff Adrien"); // calls function that outputs the stats of the specific player
+
+// a function that returns the rebounds of the player with the biggest shoe size
+console.log("SHOE SIZE, REBOUNDS")
+function bigShoeRounds() {
+    const game = gameObject();
+    let maxHomeSize = 0, maxAwaySize = 0; // maximum size of home and away players' shoes are initialized at 0
+    const homeTeam = game.home.players, awayTeam = game.away.players;
+    let bigShoePlayerHome, bigShoePlayerAway;
+
+    // loops through home team players
+    for (let player in homeTeam) {
+        const playerStats = homeTeam[player]; // accesses player stats
+        let shoeSize = playerStats.shoe; // assigns players' shoe sizes
+        
+        if (shoeSize > maxHomeSize) {// checks if the current player's shoe size is greater than the set maximum size
+            maxHomeSize = shoeSize; // if it is, the current shoe size updates the maximum shoe size
+            bigShoePlayerHome = player; // takes in account of the player with the max shoes
+        } 
+    }
+
+    // loops through away team players
+    for (let player in awayTeam) {
+        const playerStats = awayTeam[player];
+        let shoeSize = playerStats.shoe;
+
+        if (shoeSize > maxAwaySize) {
+            maxAwaySize = shoeSize; // updates max size if the player's shoe size is bigger than the previous max size
+            playerWithBigShoeAway = player; // updates player with the max sized shoes
+        }   
+    }
+
+    let maxShoeSize = Math.max(maxHomeSize, maxAwaySize);
+    let bigShoePlayer;
+
+    if (maxShoeSize === maxHomeSize)
+        bigShoePlayer = bigShoePlayerHome;
+    else
+        bigShoePlayer = bigShoePlayerAway;
+
+    const rebounds = game.home.players[bigShoePlayer]?.rebounds || game.away.players[bigShoePlayer]?.rebounds; // uses optional chaining to access the rebounds for the max-sized shoes player
+ 
+
+    console.log("PLAYER:", bigShoePlayer, "\n", "MAX SHOE SIZE:", maxShoeSize, "\n", "REBOUNDS:", rebounds); // returns the player with the max-sized shoes, and the size of the shoes
+    return;
+}
+
+bigShoeRounds();
 
